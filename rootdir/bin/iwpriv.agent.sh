@@ -1,6 +1,6 @@
 #!/system/bin/sh
 ROOT_PATH="/sdcard"
-CMD="/system/bin/iwpriv"
+CMD="/vendor/bin/iwpriv"
 rm $ROOT_PATH/iwpriv_result.txt
 while read line
 do
