@@ -310,30 +310,30 @@ case "$target" in
       ;;
 esac
 
-# In mpss AT version is greater than 3.1, need 
-# to use the new vendor-ril which supports L+L feature 
-# otherwise use the existing old one. 
-if [ -f /firmware/verinfo/ver_info.txt ]; then 
-  modem=`cat /firmware/verinfo/ver_info.txt | 
-  sed -n 's/^[^:]*modem[^:]*:[[:blank:]]*//p' | 
-  sed 's/.*AT.\(.*\)/\1/g' | cut -d \- -f 1` 
-  zygote=`getprop ro.zygote` 
-  case "$zygote" in 
-  "zygote64_32") 
-    if [ "$modem" \< "3.1" ]; then 
-      setprop vendor.rild.libpath "/vendor/lib64/libril-qc-qmi-1.so" 
-    else 
-      setprop vendor.rild.libpath "/vendor/lib64/libril-qc-hal-qmi.so" 
-    fi
-    ;; 
-  "zygote32") 
-    if [ "$modem" \< "3.1" ]; then 
-      setprop vendor.rild.libpath "/vendor/lib/libril-qc-qmi-1.so" 
-    else 
-      setprop vendor.rild.libpath "/vendor/lib/libril-qc-hal-qmi.so" 
+# In mpss AT version is greater than 3.1, need
+# to use the new vendor-ril which supports L+L feature
+# otherwise use the existing old one.
+if [ -f /firmware/verinfo/ver_info.txt ]; then
+  modem=`cat /firmware/verinfo/ver_info.txt |
+  sed -n 's/^[^:]*modem[^:]*:[[:blank:]]*//p' |
+  sed 's/.*AT.\(.*\)/\1/g' | cut -d \- -f 1`
+  zygote=`getprop ro.zygote`
+  case "$zygote" in
+  "zygote64_32")
+    if [ "$modem" \< "3.1" ]; then
+      setprop vendor.rild.libpath "/vendor/lib64/libril-qc-qmi-1.so"
+    else
+      setprop vendor.rild.libpath "/vendor/lib64/libril-qc-hal-qmi.so"
     fi
     ;;
-   esac 
+  "zygote32")
+    if [ "$modem" \< "3.1" ]; then
+      setprop vendor.rild.libpath "/vendor/lib/libril-qc-qmi-1.so"
+    else
+      setprop vendor.rild.libpath "/vendor/lib/libril-qc-hal-qmi.so"
+    fi
+    ;;
+   esac
 fi
 
 if [ -f /firmware/verinfo/ver_info.txt ]; then
@@ -527,4 +527,10 @@ fi
 if [ -f /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies ]; then
     gpu_freq=`cat /sys/class/kgsl/kgsl-3d0/gpu_available_frequencies` 2> /dev/null
     setprop ro.gpu.available_frequencies "$gpu_freq"
+fi
+
+# copy emmc cid to system property
+if [ -f /sys/block/mmcblk0/device/cid ]; then
+    emmc_cid=`cat /sys/block/mmcblk0/device/cid` 2> /dev/null
+    setprop ro.emmc.cid "$emmc_cid"
 fi

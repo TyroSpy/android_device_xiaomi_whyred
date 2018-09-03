@@ -147,30 +147,6 @@ LOCAL_SRC_FILES    := bin/init.qti.qseecomd.sh
 LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_EXECUTABLES)
 include $(BUILD_PREBUILT)
 
-include $(CLEAR_VARS)
-LOCAL_MODULE       := qca6234-service.sh
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := bin/qca6234-service.sh
-LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_EXECUTABLES)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := iwpriv.agent.sh
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := bin/iwpriv.agent.sh
-LOCAL_MODULE_PATH  := $(TARGET_OUT_SYSTEM_ETC)
-include $(BUILD_PREBUILT)
-
-include $(CLEAR_VARS)
-LOCAL_MODULE       := myftm.agent.sh
-LOCAL_MODULE_TAGS  := optional eng
-LOCAL_MODULE_CLASS := ETC
-LOCAL_SRC_FILES    := bin/myftm.agent.sh
-LOCAL_MODULE_PATH  := $(TARGET_OUT_VENDOR_EXECUTABLES)
-include $(BUILD_PREBUILT)
-
 # etc
 
 include $(CLEAR_VARS)

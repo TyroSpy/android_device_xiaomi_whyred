@@ -360,9 +360,6 @@ PRODUCT_PACKAGES += \
     init.qcom.wifi.sh \
     init.qti.ims.sh \
     init.qti.qseecomd.sh \
-    qca6234-service.sh \
-    iwpriv.agent.sh \
-    myftm.agent.sh \
     fstab.qcom \
     init.msm.usb.configfs.rc \
     init.qcom.factory.rc \

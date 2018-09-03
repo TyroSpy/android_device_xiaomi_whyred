@@ -29,8 +29,6 @@ import /vendor/etc/init/hw/init.qcom.usb.rc
 import /vendor/etc/init/hw/init.msm.usb.configfs.rc
 import /vendor/etc/init/hw/init.target.rc
 import /vendor/etc/init/hw/init.qcom.factory.rc
-import /vendor/etc/init/hw/init.qcom.test.rc
-import /vendor/etc/init/hw/init.factory.mi.rc
 
 on early-init
     mount debugfs debugfs /sys/kernel/debug
@@ -56,7 +54,6 @@ on init
 
 on post-fs
     chmod 0755 /sys/kernel/debug/tracing
-    insmod /system/lib/modules/exfat.ko
 
 on early-boot
     # set RLIMIT_MEMLOCK to 64MB
@@ -127,7 +124,6 @@ on boot
 #   ReadMin, ReadInitial, ReadMax, WriteMin, WriteInitial, WriteMax,
     setprop net.tcp.buffersize.wifi    524288,2097152,4194304,262144,524288,1048576
 
-
     setprop ro.telephony.call_ring.multiple false
 
     #enable camera read sensors data
@@ -135,7 +131,6 @@ on boot
 
     #Remove SUID bit for iproute2 ip tool
     chmod 0755 /system/bin/ip
-
 
     chmod 0444 /sys/devices/platform/msm_hsusb/gadget/usb_state
 
@@ -166,6 +161,9 @@ on boot
     # connections on high-throughput links get dropped when
     # an ack packet comes out of order
     write /proc/sys/net/netfilter/nf_conntrack_tcp_be_liberal 1
+
+    #Make MTU adjusting for sometimes cannot access to internet
+    write /proc/sys/net/ipv4/tcp_mtu_probing 1
 
     # Set the console loglevel to < KERN_INFO
     # Set the default message loglevel to KERN_INFO
@@ -302,6 +300,7 @@ on post-fs-data
     # Create the directories used by LctDiagSendData
     mkdir /data/lct_diag 0771 system system
     chown system system /data/lct_diag
+    rm /data/lct_diag/client_*
 
     mkdir /data/dpm/nsrm 0771 system system
     chown system system /data/dpm/nsrm
@@ -336,6 +335,10 @@ on post-fs-data
     chown system system /sys/devices/platform/msm_sdcc.2/polling
     chown system system /sys/devices/platform/msm_sdcc.3/polling
     chown system system /sys/devices/platform/msm_sdcc.4/polling
+
+    # Touchscreen
+    chown system system /sys/class/input/input2/wake_gesture
+    chmod 0664 /sys/class/input/input2/wake_gesture
 
     #Create the symlink to qcn wpa_supplicant folder for ar6000 wpa_supplicant
     mkdir /data/system 0775 system system
@@ -500,21 +503,6 @@ on property:persist.debug.trace=1
     mkdir /data/core 0777 root root
     write /proc/sys/kernel/core_pattern "/data/core/%E.%p.%e"
 
-#zhuxiaomin @ 20170928
-service iwprivftm /system/bin/sh /system/etc/iwpriv.agent.sh
-    oneshot
-    disabled
-on property:persist.sys.iwpriv=1
-    start iwprivftm
-
-#++++>
-on property:sys.ptt_socket_app=1
-    start ptt_ffbm
-
-on property:sys.ftmd=1
-    start ftmd
-#<++++  zhuxiaomin @ 20170928    Add for WiFi & BT FFBM test.
-
 on property:init.svc.wpa_supplicant=stopped
     stop dhcpcd
 
@@ -559,7 +547,7 @@ on property:vold.decrypt=trigger_restart_framework
     start qcom-c_main-sh
     start config_bt_addr
     start wcnss-service
-    start cnss_diag
+#    start cnss_diag
 
 on property:persist.env.fastdorm.enabled=true
     setprop persist.radio.data_no_toggle 1
@@ -572,7 +560,7 @@ service cnd /system/vendor/bin/cnd
 service dpmQmiMgr /system/vendor/bin/dpmQmiMgr
     class main
     user system
-    group system
+    group radio system
 
 service irsc_util /vendor/bin/irsc_util "/vendor/etc/sec_config"
     class core
@@ -854,12 +842,18 @@ on property:wifi.ftmd.load=true
 on property:wifi.ftmd.load=false
     stop openwifi
 
-
+#Modify a way to collect wlan logs and default close the logs in consumer.
 service cnss_diag /system/vendor/bin/cnss_diag -q -f
     class main
     user system
     group system wifi inet net_admin sdcard_rw media_rw diag
+    disabled
     oneshot
+
+on property:sys.cnss_diag.enable=1
+    start cnss_diag
+on property:persist.service.cnss_diag.enable=1
+    start cnss_diag
 
 service cnss-daemon /system/vendor/bin/cnss-daemon -n -l
     class late_start
@@ -1075,7 +1069,7 @@ on property:sys.qbcharger.enable=true
 on property:sys.qbcharger.enable=false
     stop qbcharger
 
-service diag_mdlog_start /system/vendor/bin/diag_mdlog
+service diag_mdlog_start /system/vendor/bin/diag_mdlog -n 40
     class late_start
     user shell
     group system diag oem_2901 sdcard_rw sdcard_r media_rw
@@ -1244,13 +1238,6 @@ service closewifi /system/bin/sh /vendor/bin/wifitest_close.sh
     disabled
     oneshot
 
-#for wifi myftm test
-service myftmftm /vendor/bin/sh /vendor/bin/myftm.agent.sh
-    oneshot
-    disabled
-on property:persist.sys.myftm=1
-    start myftmftm
-    
 #zhufanghua@longcheer.com
 service btclose /vendor/bin/sh /vendor/bin/bt_close.sh
 	user root
@@ -1298,6 +1285,7 @@ service LctDiagSendData /vendor/bin/LctDiagSendData
 #    stop LctDiagSendData
 on property:ro.runtime.firstboot=*
     start LctDiagSendData
+
 #Add command for PA test end
 service power_off_alarm /vendor/bin/power_off_alarm
     class core
@@ -1309,4 +1297,9 @@ service config_bt_addr /vendor/bin/btnvtool -O
     class core
     user bluetooth
     group bluetooth radio
+    oneshot
+
+service goodix_script /vendor/bin/init.goodix.sh
+    class late_start
+    user system
     oneshot
