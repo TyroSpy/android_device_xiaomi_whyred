@@ -337,8 +337,6 @@
     <ctl name="EAR SPKR PA Gain" value="G_DEFAULT" />
 
     <!-- Volume controls -->
-    <ctl name="HPHL Volume" value="9" />
-    <ctl name="HPHR Volume" value="9" />
     <ctl name="EAR PA Gain" value="POS_1P5_DB" />
     <ctl name="EAR PA Boost" value="ENABLE" />
 
@@ -1888,6 +1886,13 @@
         <!--ctl name="COMP0 RX2" value="1" /-->
         <ctl name="HPHL" value="Switch" />
         <ctl name="HPHR" value="Switch" />
+    </path>
+
+    <path name="hph-highquality-mode">
+        <ctl name="RX HPH Mode" value="HD2" />
+    </path>
+     <path name="hph-lowpower-mode">
+        <ctl name="RX HPH Mode" value="NORMAL" />
     </path>
 
     <path name="headphones-44.1">
