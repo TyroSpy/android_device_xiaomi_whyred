@@ -14,8 +14,8 @@ vendor/lib64/libfastcvopt.so
 vendor/lib64/libmdsprpc.so
 
 # ADSP modules
-#vendor/lib/rfsa/adsp/capi_v2_aptX_Classic.so
-#vendor/lib/rfsa/adsp/capi_v2_aptX_HD.so
+vendor/lib/rfsa/adsp/capi_v2_aptX_Classic.so
+vendor/lib/rfsa/adsp/capi_v2_aptX_HD.so
 vendor/lib/rfsa/adsp/libadsp_fd_skel.so
 vendor/lib/rfsa/adsp/libadsp_hvx_add_constant.so
 vendor/lib/rfsa/adsp/libadsp_hvx_skel.so
@@ -127,6 +127,7 @@ vendor/lib64/libbt-hidlclient.so
 vendor/lib64/libbtnv.so
 
 # Camera
+lib/libCameraEffectJNI.so
 lib/libchromaflash.so
 lib/libdualcameraddm.so
 lib/libjni_blurbuster.so
@@ -166,6 +167,7 @@ lib/libtruescanner.so
 lib/libts_detected_face_jni.so
 lib/libts_face_beautify_hal.so
 lib/libts_face_beautify_jni.so
+lib64/libCameraEffectJNI.so
 lib64/libchromaflash.so
 lib64/libdualcameraddm.so
 lib64/libjni_blurbuster.so
@@ -870,7 +872,8 @@ vendor/firmware/cpp_firmware_v1_8_0.fw
 
 # Camera OIS
 vendor/lib/libois_bu63165.so
-vendor/lib/libois_lc898122.so
+# Requered only for MIUI 9 vendor
+#vendor/lib/libois_lc898122.so
 
 # Charger
 vendor/bin/hvdcp_opti
@@ -1150,6 +1153,7 @@ vendor/bin/xtwifi-inet-agent
 etc/permissions/com.qti.location.sdk.xml
 etc/permissions/com.qualcomm.location.xml
 etc/permissions/izat.xt.srv.xml
+etc/permissions/privapp-permissions-com.qualcomm.location.xml
 vendor/etc/cacert_location.pem
 vendor/etc/init/vendor.qti.gnss@1.0-service.rc
 vendor/etc/xtra_root_cert.pem
@@ -1933,7 +1937,6 @@ bin/sdlog
 bin/seempd
 vendor/bin/adswitch
 vendor/bin/ftmdaemon
-vendor/bin/bluedut.sh
 vendor/bin/iwpriv
 vendor/bin/LctDiagSendData
 vendor/bin/LKCore
@@ -1949,7 +1952,9 @@ vendor/bin/wdsdaemon
 vendor/bin/wifisarfar
 vendor/bin/wifisarnear
 vendor/bin/bt_close.sh
+vendor/bin/bluedut.sh
 vendor/bin/loopback.sh
+vendor/bin/myftm.agent.sh
 vendor/bin/wifitest.sh
 vendor/bin/wifitest_close.sh
 
@@ -1969,6 +1974,7 @@ vendor/bin/mmi_diag
 vendor/bin/mtd
 vendor/bin/PktRspTest
 #vendor/bin/playback_audio.sh
+vendor/bin/qca6234-service.sh
 vendor/bin/qjpeg-dma-test
 vendor/bin/resize_ext4
 vendor/bin/smart-pa-tfa-cal
@@ -1982,10 +1988,13 @@ vendor/bin/toolbox_vendor
 vendor/bin/vendor_cmd_tool
 #vendor/bin/vsimd
 vendor/bin/WifiLogger_app
+# Requered only for MIUI 10 vendor
+xbin/system_perf_init
 
 # Unclassified Misc
--vendor/app/QDMA-UI/QDMA-UI.apk
--vendor/app/QDMA/QDMA.apk
+#-vendor/app/QDMA-UI/QDMA-UI.apk
+#-vendor/app/QDMA/QDMA.apk
+etc/iwpriv.agent.sh
 vendor/Diag.cfg
 vendor/etc/speaker.ftcfg
 vendor/etc/diracvdd.bin
@@ -1994,14 +2003,14 @@ vendor/media/LMspeed_508.emd
 vendor/media/PFFprec_600.emd
 vendor/firmware/dbmd4_va_fw.bin
 vendor/firmware/voice_amodel.bin
-vendor/etc/pa_ca_28db.wav
-vendor/etc/pinknoise.wav
-vendor/etc/receiver_playback.wav
-vendor/etc/silence.wav
-vendor/etc/silense.wav
-vendor/etc/speaker_playback.wav
-vendor/etc/spk_pb.wav
-vendor/etc/sweep.wav
+#vendor/etc/pa_ca_28db.wav
+#vendor/etc/pinknoise.wav
+#vendor/etc/receiver_playback.wav
+#vendor/etc/silence.wav
+#vendor/etc/silense.wav
+#vendor/etc/speaker_playback.wav
+#vendor/etc/spk_pb.wav
+#vendor/etc/sweep.wav
 
 # Unclassified Libs
 lib/librcc.so
@@ -2049,27 +2058,34 @@ vendor/etc/camera/score_icon.png
 vendor/etc/camera/sdm_ys_32p_120_21_5_perturb50.bin
 vendor/etc/camera/watermark_font_2300_3199.dat
 
-# Old Rom
-vendor/lib/libarcsoft_beauty_shot.so
-vendor/lib/libarcsoft_portrait_editing.so
-vendor/lib/libmicamera.ic.so
-vendor/lib/libfit_face_beauty.so
-#vendor/lib/libsymphony-cpu.so
-#vendor/lib/libsymphonypower.so
-#vendor/lib/libVDClearShot.so
-#vendor/lib/libVDSuperPhotoAPI.so
-lib64/libSNPE.so
+# Requered only for MIUI 9 vendor
+#lib64/libSNPE.so
+#vendor/lib/libarcsoft_beauty_shot.so
+#vendor/lib/libarcsoft_portrait_editing.so
+#vendor/lib/libmicamera.ic.so
+#vendor/lib/libfit_face_beauty.so
 
+# Requered only for MIUI 10 vendor
+vendor/lib/libsymphony-cpu.so
+vendor/lib/libsymphonypower.so
+vendor/lib/libVDClearShot.so
+vendor/lib/libVDSuperPhotoAPI.so
+vendor/lib/mibokeh_636_opencl.bin
+vendor/lib/libdisplayppalgorithm.so
+vendor/lib64/libdisplayppalgorithm.so
+
+lib/libSonyIMX376C3RmscLibrary.so
+lib/libSonyIMX376KRmscLibrary.so
+lib64/libgnustl_shared.so
 vendor/lib/libMiCameraHal.so
 vendor/lib/libFaceGrade.so
 vendor/lib/libcamera_scene.so
-vendor/lib/libSNPE.so
+vendor/lib/lib_lowlight.so
 vendor/lib/libmibokeh_636.so
 vendor/lib/libmorphohht4.0.so
 vendor/lib/libMiWatermark.so
+vendor/lib/libSNPE.so
 vendor/lib/libXMFD_AgeGender.so
 vendor/lib/libvidhance.so
 vendor/lib/libvidhance_gyro.so
-vendor/lib/lib_lowlight.so
 vendor/lib/libgnustl_shared.so
-lib64/libgnustl_shared.so
