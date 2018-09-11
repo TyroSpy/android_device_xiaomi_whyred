@@ -80,6 +80,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.effect@2.0-service \
     android.hardware.soundtrigger@2.0-impl \
     android.hardware.soundtrigger@2.0-service \
+    audiod \
     audio.a2dp.default \
     audio.primary.sdm660 \
     audio.r_submix.default \
@@ -137,7 +138,8 @@ PRODUCT_PACKAGES += \
 # Connectivity Engine support (CNE)
 PRODUCT_PACKAGES += \
     cneapiclient \
-    com.quicinc.cne
+    com.quicinc.cne \
+    services-ext
 
 # Configs
 PRODUCT_COPY_FILES += \
@@ -162,6 +164,7 @@ PRODUCT_PACKAGES += \
     gralloc.sdm660 \
     hwcomposer.sdm660 \
     libdisplayconfig \
+    libhwc2on1apadapter \
     liboverlay \
     libqdMetaData.system \
     libtinyxml \
@@ -179,8 +182,7 @@ PRODUCT_COPY_FILES += \
 
 # Fingerprint feature
 PRODUCT_PACKAGES += \
-    android.hardware.biometrics.fingerprint@2.1-service.xiaomi_sdm660 \
-    fingerprintd
+    android.hardware.biometrics.fingerprint@2.1-service.xiaomi_sdm660
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.fingerprint.xml:$(TARGET_COPY_OUT_VENDOR)/etc/permissions/android.hardware.fingerprint.xml
@@ -198,12 +200,15 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     android.hardware.gnss@1.0-impl-qti \
     android.hardware.gnss@1.0-service-qti \
+    gps.sdm660 \
     libcurl \
     libgnss \
     libgnsspps \
     libgps.utils \
     liblocation_api \
     libloc_core \
+    libloc_ds_api \
+    libloc_stub \
     libloc_pla \
     libvehiclenetwork-native
 
@@ -305,6 +310,7 @@ PRODUCT_PACKAGES += \
 # OMX
 PRODUCT_PACKAGES += \
     libc2dcolorconvert \
+    libextmedia_jni \
     libmm-omxcore \
     libOmxAacEnc \
     libOmxAmrEnc \
@@ -383,10 +389,6 @@ PRODUCT_PACKAGES += \
 
 # RIL
 PRODUCT_PACKAGES += \
-    android.hardware.radio@1.0 \
-    android.hardware.radio@1.1 \
-    android.hardware.radio.deprecated@1.0 \
-    rild \
     librmnetctl \
     libxml2 \
     libprotobuf-cpp-full
@@ -424,7 +426,6 @@ PRODUCT_BOOT_JARS += \
 
 # Telephony
 PRODUCT_PACKAGES += \
-    qti-telephony-common \
     telephony-ext
 
 PRODUCT_BOOT_JARS += \
@@ -470,10 +471,14 @@ PRODUCT_PACKAGES += \
     android.hardware.wifi@1.0-service \
     vendor.qti.hardware.wifi.supplicant@1.0 \
     vendor.qti.hardware.wifi.supplicant@1.0_vendor \
+    dhcpcd.conf \
     hostapd \
     hostapd_cli \
+    libcld80211 \
+    libqsap_sdk \
+    libQWiFiSoftApCfg \
     libwifi-hal-qcom \
-    wcnss_service \
+    libwpa_client \
     wificond \
     wpa_supplicant \
     wpa_supplicant.conf \
