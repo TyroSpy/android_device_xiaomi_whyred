@@ -463,4 +463,8 @@
     <!-- Boolean indicating whether the HWC setColorTransform function can be performed efficiently
          in hardware. -->
     <bool name="config_setColorTransformAccelerated">true</bool>
+
+    <!-- Any User defined parameters -->
+    <integer name="config_deviceHardwareKeys">64</integer>
+    <bool name="config_haveHigherAspectRatioScreen">true</bool>
 </resources>
