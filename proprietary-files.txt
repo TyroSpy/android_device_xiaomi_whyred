@@ -1724,7 +1724,6 @@ vendor/bin/ssr_diag
 vendor/bin/ssr_setup
 
 # Thermal
-vendor/etc/thermal-engine.conf
 vendor/bin/thermal-engine
 vendor/lib/libthermalfeature.so
 -vendor/lib/libthermalclient.so
