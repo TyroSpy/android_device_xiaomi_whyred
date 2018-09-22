@@ -15,7 +15,6 @@ VNDK_SP_LIBRARIES := \
     libc++ \
     libcompiler_rt \
     libcutils \
-    libft2 \
     libhardware \
     libhidlbase \
     libhidlmemory \
@@ -23,6 +22,8 @@ VNDK_SP_LIBRARIES := \
     libhwbinder \
     libion \
     liblzma \
-    libpng \
     libunwind \
-    libutils
+    libunwindstack \
+    libutils \
+    libutilscallstack \
+    libdexfile
