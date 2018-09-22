@@ -1104,6 +1104,7 @@ vendor/lib64/libFidoCrypto_vendor.so
 vendor/lib64/libFIDOKeyProvisioning.so
 
 # Fingerprint sensor
+lib64/libsoftkeymaster.so:vendor/lib64/libsoftkeymaster.so
 framework/vendor.qti.hardware.fingerprint-V1.0-java.jar
 vendor/etc/permissions/com.fingerprints.extension.xml
 vendor/framework/com.fingerprints.extension.jar
@@ -1145,7 +1146,6 @@ vendor/bin/garden_app
 vendor/bin/hw/vendor.qti.gnss@1.0-service
 vendor/bin/loc_launcher
 vendor/bin/lowi-server
-vendor/bin/slim_daemon
 vendor/bin/xtra-daemon
 vendor/bin/xtwifi-client
 vendor/bin/xtwifi-inet-agent
@@ -2087,3 +2087,8 @@ vendor/lib/libXMFD_AgeGender.so
 vendor/lib/libvidhance.so
 vendor/lib/libvidhance_gyro.so
 vendor/lib/libgnustl_shared.so
+
+# Addition libraries camera for Pie
+lib/libskia.so
+lib/libicuuc.so:lib/libicuuc-v27.so
+lib/libminikin.so:lib/libminikin-v27.so
