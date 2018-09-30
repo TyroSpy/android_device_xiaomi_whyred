@@ -18,11 +18,24 @@
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
 
-# Dalvik overrides
-$(call inherit-product, frameworks/native/build/phone-xxhdpi-3072-dalvik-heap.mk)
+# Properties
+PRODUCT_PROPERTY_OVERRIDES += \
+    ro.am.reschedule_service=true \
+    ro.sys.fw.use_trim_settings=true
 
-# default is nosdcard, S/W button enabled in resource
-PRODUCT_CHARACTERISTICS := nosdcard
+# Boot animation
+TARGET_SCREEN_HEIGHT := 2160
+TARGET_SCREEN_WIDTH := 1080
+
+# Overlay
+DEVICE_PACKAGE_OVERLAYS += \
+    $(LOCAL_PATH)/overlay
+
+PRODUCT_ENFORCE_RRO_TARGETS := \
+    framework-res
+
+# Vendor properties
+-include $(LOCAL_PATH)/prop.mk
 
 # Permissions
 PRODUCT_COPY_FILES += \
@@ -116,10 +129,6 @@ PRODUCT_PACKAGES += \
     android.hardware.bluetooth@1.0-impl-qti \
     libbt-vendor \
     libbthost_if
-
-# Boot animation
-TARGET_SCREEN_HEIGHT := 2160
-TARGET_SCREEN_WIDTH := 1080
 
 # Camera
 PRODUCT_PACKAGES += \
@@ -320,21 +329,6 @@ PRODUCT_PACKAGES += \
     libOmxVenc \
     libstagefright_wfd \
     libstagefrighthw
-
-# Overlay
-DEVICE_PACKAGE_OVERLAYS += \
-    $(LOCAL_PATH)/overlay
-
-PRODUCT_ENFORCE_RRO_TARGETS := \
-    framework-res
-
-# Vendor properties
--include $(LOCAL_PATH)/prop.mk
-
-# Properties
-PRODUCT_PROPERTY_OVERRIDES += \
-    ro.am.reschedule_service=true \
-    ro.sys.fw.use_trim_settings=true
 
 # Power
 PRODUCT_PACKAGES += \
