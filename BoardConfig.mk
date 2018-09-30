@@ -221,6 +221,9 @@ TARGET_POWERHAL_VARIANT := qcom
 # Keymaster
 TARGET_PROVIDES_KEYMASTER := true
 
+# Lights
+TARGET_PROVIDES_LIBLIGHT := true
+
 # Encryption
 TARGET_HW_DISK_ENCRYPTION := true
 
