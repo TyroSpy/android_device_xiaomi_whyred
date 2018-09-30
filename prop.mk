@@ -146,15 +146,15 @@ persist.timed.enable=true
 
 # NITZ
 PRODUCT_PROPERTY_OVERRIDES += \
-persist.rild.nitz_plmn= \
-persist.rild.nitz_long_ons_0= \
-persist.rild.nitz_long_ons_1= \
-persist.rild.nitz_long_ons_2= \
-persist.rild.nitz_long_ons_3= \
-persist.rild.nitz_short_ons_0= \
-persist.rild.nitz_short_ons_1= \
-persist.rild.nitz_short_ons_2= \
-persist.rild.nitz_short_ons_3=
+persist.rild.nitz_plmn="" \
+persist.rild.nitz_long_ons_0="" \
+persist.rild.nitz_long_ons_1="" \
+persist.rild.nitz_long_ons_2="" \
+persist.rild.nitz_long_ons_3="" \
+persist.rild.nitz_short_ons_0="" \
+persist.rild.nitz_short_ons_1="" \
+persist.rild.nitz_short_ons_2="" \
+persist.rild.nitz_short_ons_3=""
 
 # System property for Qualcomm cabl
 PRODUCT_PROPERTY_OVERRIDES += \
