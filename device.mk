@@ -411,13 +411,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/configs/sensors/hals.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/hals.conf \
     $(LOCAL_PATH)/configs/sensors/sensor_def_qcomdev.conf:$(TARGET_COPY_OUT_VENDOR)/etc/sensors/sensor_def_qcomdev.conf
 
-# Soter
-PRODUCT_PACKAGES += \
-    soter
-
-PRODUCT_BOOT_JARS += \
-    soter
-
 # Telephony
 PRODUCT_PACKAGES += \
     telephony-ext
@@ -507,9 +500,5 @@ PRODUCT_PACKAGES += \
 # Doze
 PRODUCT_PACKAGES += \
     XiaomiDoze
-
-# XiaomiParts
-PRODUCT_PACKAGES += \
-    XiaomiParts
 
 $(call inherit-product, vendor/xiaomi/whyred/whyred-vendor.mk)
