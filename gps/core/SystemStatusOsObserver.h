@@ -39,7 +39,8 @@
 #include <MsgTask.h>
 #include <DataItemId.h>
 #include <IOsObserver.h>
-#include <platform_lib_log_util.h>
+#include <loc_pla.h>
+#include <log_util.h>
 #include <LocUnorderedSetMap.h>
 
 namespace loc_core
@@ -105,6 +106,12 @@ public:
     // To set the framework action request object
     inline void setFrameworkActionReqObj(IFrameworkActionReq* frameworkActionReqObj) {
         mContext.mFrameworkActionReqObj = frameworkActionReqObj;
+#ifdef USE_GLIB
+        if (mBackHaulConnectReqCount > 0) {
+            connectBackhaul();
+            mBackHaulConnectReqCount = 0;
+        }
+#endif
     }
 
     // IDataItemSubscription Overrides
@@ -144,6 +151,10 @@ private:
     // Cache the subscribe and requestData till subscription obj is obtained
     void cacheObserverRequest(ObserverReqCache& reqCache,
             const list<DataItemId>& l, IDataItemObserver* client);
+#ifdef USE_GLIB
+    // Cache the framework action request for connect/disconnect
+    int         mBackHaulConnectReqCount;
+#endif
 
     void subscribe(const list<DataItemId>& l, IDataItemObserver* client, bool toRequestData);
 
