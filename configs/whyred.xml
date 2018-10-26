@@ -277,4 +277,6 @@
     <float name="device_sar">1.188</float>
     <!--whether support freeform mode in game mode-->
     <bool name="support_freeform_reply">true</bool>
+    <!--wether support ime xiaoai voice input-->
+    <bool name="surpport_ime_xiaoai_voice">true</bool>
 </features>
