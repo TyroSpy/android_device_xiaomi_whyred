@@ -9,7 +9,7 @@
 /dev/block/bootdevice/by-name/boot       /boot              emmc   defaults                                         defaults
 /dev/block/bootdevice/by-name/system     /system            ext4   ro,barrier=1,discard                             wait
 /dev/block/bootdevice/by-name/vendor     /vendor            ext4   ro,barrier=1,discard                             wait
-/dev/block/bootdevice/by-name/userdata   /data              ext4   nosuid,nodev,barrier=1,noauto_da_alloc,discard,lazytime   wait,resize,check,forceencrypt=footer,crashcheck
+/dev/block/bootdevice/by-name/userdata   /data              ext4   nosuid,nodev,barrier=1,noauto_da_alloc,discard,lazytime   wait,resize,check,encryptable=footer,crashcheck
 /dev/block/bootdevice/by-name/cust       /cust              ext4   ro,nosuid,nodev,barrier=1                        wait,check
 /devices/soc/c084000.sdhci/mmc_host*     /storage/sdcard1   vfat   nosuid,nodev                                     wait,voldmanaged=sdcard1:auto,encryptable=footer
 /dev/block/bootdevice/by-name/misc       /misc              emmc   defaults                                         defaults
