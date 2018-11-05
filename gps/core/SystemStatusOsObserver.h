@@ -127,6 +127,10 @@ public:
     // IFrameworkActionReq Overrides
     virtual void turnOn(DataItemId dit, int timeOut = 0) override;
     virtual void turnOff(DataItemId dit) override;
+#ifdef USE_GLIB
+    virtual bool connectBackhaul() override;
+    virtual bool disconnectBackhaul();
+#endif
 
 private:
     SystemStatus*                                    mSystemStatus;

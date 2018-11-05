@@ -151,7 +151,6 @@ private:
         eAgcGlo = 20,
         eAgcBds = 21,
         eAgcGal = 22,
-        eMax0 = eAgcGal,
         eLeapSeconds = 23,
         eLeapSecUnc = 24,
         eMax
@@ -188,7 +187,7 @@ public:
         : SystemStatusNmeaBase(str_in, len_in)
     {
         memset(&mM1, 0, sizeof(mM1));
-        if (mField.size() <= eMax0) {
+        if (mField.size() < eMax) {
             LOC_LOGE("PQWM1parser - invalid size=%zu", mField.size());
             mM1.mTimeValid = 0;
             return;
@@ -215,10 +214,8 @@ public:
         mM1.mAgcGlo = atof(mField[eAgcGlo].c_str());
         mM1.mAgcBds = atof(mField[eAgcBds].c_str());
         mM1.mAgcGal = atof(mField[eAgcGal].c_str());
-        if (mField.size() > eLeapSecUnc) {
-            mM1.mLeapSeconds = atoi(mField[eLeapSeconds].c_str());
-            mM1.mLeapSecUnc = atoi(mField[eLeapSecUnc].c_str());
-        }
+        mM1.mLeapSeconds = atoi(mField[eLeapSeconds].c_str());
+        mM1.mLeapSecUnc = atoi(mField[eLeapSecUnc].c_str());
     }
 
     inline SystemStatusPQWM1& get() { return mM1;} //getparser
