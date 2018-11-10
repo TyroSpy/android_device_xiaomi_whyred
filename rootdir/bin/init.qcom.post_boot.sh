@@ -395,3 +395,9 @@ esac
 misc_link=$(ls -l /dev/block/bootdevice/by-name/misc)
 real_path=${misc_link##*>}
 setprop persist.vendor.mmi.misc_dev_path $real_path
+
+#For wifi enable failed issue need to check persist/rfs's selinux contexts
+checkrfs=$(ls -lZ /persist/rfs | grep rfs_file)
+if [ "$checkrfs" == "" ]; then
+setprop rfs.contexts.wrong true
+fi
